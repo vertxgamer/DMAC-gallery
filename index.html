@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>DMAC Photo Gallery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Link to your stylesheet -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,10 +23,10 @@
     <h2>DMAC Photo Gallery</h2>
     <p class="intro">Browse albums from our events, competitions, and fun-fly gatherings.</p>
 
-    <!-- Album tiles -->
+    <!-- Album overview grid -->
     <div id="album-grid" class="gallery-grid"></div>
 
-    <!-- Album view -->
+    <!-- Album view (hidden until an album is clicked) -->
     <div id="album-view" style="display:none;">
       <h3 id="album-title"></h3>
       <div id="album-photos" class="gallery-grid"></div>
@@ -62,7 +63,7 @@
 
       for (const item of items) {
         if (item.type === "dir") {
-          // Fetch files inside album
+          // Fetch files inside album folder
           const albumResponse = await fetch(item.url);
           const albumFiles = await albumResponse.json();
           const imageFiles = albumFiles.filter(f => f.type === "file" && f.name.match(/\.(jpg|jpeg|png|gif)$/i));
@@ -72,7 +73,7 @@
             const latestFile = imageFiles[imageFiles.length - 1];
 
             const albumTile = document.createElement("div");
-            albumTile.className = "gallery-item album-tile";
+            albumTile.className = "album-tile";
 
             const img = document.createElement("img");
             img.src = latestFile.download_url;
