@@ -7,7 +7,6 @@
 
   <!-- Internal CSS -->
   <style>
-    /* Root palette */
     :root {
       --blue: #1f6fb5;
       --orange: #ff7f00;
@@ -51,22 +50,22 @@
 
     .gallery {
       text-align: center;
-      padding: 60px 20px;
+      padding: 40px 20px;
     }
     .gallery h2 {
       color: var(--orange);
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
     .gallery .intro {
-      max-width: 700px;
-      margin: 0 auto 40px;
+      max-width: 600px;
+      margin: 0 auto 30px;
       color: var(--muted);
     }
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 15px;
     }
 
     /* Album Tiles */
@@ -74,13 +73,13 @@
       position: relative;
       cursor: pointer;
       overflow: hidden;
-      border-radius: 12px;
+      border-radius: 10px;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
     }
     .album-tile img {
       width: 100%;
-      height: 150px;
+      height: 120px;
       object-fit: cover;
       display: block;
       transition: transform 0.3s ease;
@@ -90,18 +89,19 @@
     }
     .album-tile span {
       position: absolute;
-      bottom: 10px; left: 10px;
+      bottom: 8px; left: 8px;
       background: rgba(12,27,42,0.7);
-      padding: 6px 10px;
+      padding: 4px 8px;
       border-radius: 6px;
       color: var(--white);
       font-weight: 600;
+      font-size: 0.8rem;
     }
     .album-tile::after {
       content: "📁";
       position: absolute;
-      top: 10px; right: 10px;
-      font-size: 1.2rem;
+      top: 8px; right: 8px;
+      font-size: 1rem;
       color: var(--orange);
     }
 
@@ -115,7 +115,7 @@
     }
     .gallery-item img {
       width: 100%;
-      height: 150px;
+      height: 120px;
       object-fit: cover;
       display: block;
       transition: transform 0.3s ease;
@@ -126,16 +126,15 @@
     }
     .gallery-item span {
       position: absolute;
-      bottom: 8px; left: 8px;
+      bottom: 6px; left: 6px;
       background: rgba(12,27,42,0.7);
-      padding: 4px 8px;
+      padding: 3px 6px;
       border-radius: 6px;
       color: var(--white);
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 600;
     }
 
-    /* Lightbox */
     .lightbox {
       display: none;
       position: fixed;
@@ -165,7 +164,7 @@
     footer {
       background: rgba(12,27,42,0.9);
       text-align: center;
-      padding: 30px 20px;
+      padding: 20px;
       border-top: 2px solid var(--orange);
     }
     footer p {
@@ -175,12 +174,12 @@
     footer .social-icons {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 15px;
       margin-top: 10px;
     }
     footer .social-icons a {
       color: var(--orange);
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       transition: color 0.3s;
     }
     footer .social-icons a:hover {
@@ -189,7 +188,6 @@
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
     <nav>
       <ul>
@@ -199,7 +197,6 @@
     </nav>
   </header>
 
-  <!-- Gallery Section -->
   <section class="gallery">
     <h2>DMAC Photo Gallery</h2>
     <p class="intro">Browse albums from our events, competitions, and fun-fly gatherings.</p>
@@ -213,13 +210,11 @@
     </div>
   </section>
 
-  <!-- Lightbox -->
   <div id="lightbox" class="lightbox">
     <a href="#" class="lightbox-close">&times;</a>
     <img id="lightbox-img" src="" alt="Expanded view">
   </div>
 
-  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Durban Model Aircraft Club | Cato Ridge, KwaZulu-Natal</p>
     <div class="social-icons">
@@ -229,8 +224,7 @@
     </div>
   </footer>
 
-  <!-- JS -->
-  <script>
+    <script>
     const username = "vertxgamer";
     const repo = "DMAC-gallery";
     const basePath = "images";
@@ -264,4 +258,73 @@
 
       for (const item of items) {
         if (item.type === "dir") {
-          const albumFiles = await fetchJSON(item.url
+          const albumFiles = await fetchJSON(item.url);
+          const imageFiles = albumFiles.filter(f => f.type === "file" && /\.(jpg|jpeg|png|gif)$/i.test(f.name));
+          if (imageFiles.length === 0) continue;
+
+          const latestFile = imageFiles[imageFiles.length - 1];
+
+          const tile = document.createElement("div");
+          tile.className = "album-tile";
+
+          const img = document.createElement("img");
+          img.src = latestFile.download_url;
+          img.alt = item.name;
+
+          const caption = document.createElement("span");
+          caption.textContent = item.name;
+
+          tile.appendChild(img);
+          tile.appendChild(caption);
+
+          tile.addEventListener("click", () => openAlbum(item.name, item.url));
+          albumGrid.appendChild(tile);
+        }
+      }
+      showAlbums();
+    }
+
+    async function openAlbum(name, folderApiUrl) {
+      albumTitle.textContent = name;
+      albumPhotos.innerHTML = "";
+
+      const files = await fetchJSON(folderApiUrl);
+      const images = files.filter(f => f.type === "file" && /\.(jpg|jpeg|png|gif)$/i.test(f.name));
+
+      images.forEach(file => {
+        const tile = document.createElement("div");
+        tile.className = "gallery-item";
+
+        const img = document.createElement("img");
+        img.src = file.download_url;
+        img.alt = file.name;
+        img.addEventListener("click", () => openLightbox(file.download_url));
+
+        const caption = document.createElement("span");
+        caption.textContent = file.name.replace(/\.[^/.]+$/, "");
+
+        tile.appendChild(img);
+        tile.appendChild(caption);
+        albumPhotos.appendChild(tile);
+      });
+
+      showAlbumView();
+    }
+
+    function openLightbox(url) {
+      lightboxImg.src = url;
+      lightbox.style.display = "flex";
+    }
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target.id === "lightbox" || e.target.className === "lightbox-close") {
+        lightbox.style.display = "none";
+      }
+    });
+
+    backButton.addEventListener("click", showAlbums);
+
+    document.addEventListener("DOMContentLoaded", loadAlbums);
+  </script>
+</body>
+</html>
