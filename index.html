@@ -4,7 +4,189 @@
   <meta charset="UTF-8">
   <title>DMAC Photo Gallery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+
+  <!-- Internal CSS -->
+  <style>
+    /* Root palette */
+    :root {
+      --blue: #1f6fb5;
+      --orange: #ff7f00;
+      --white: #ffffff;
+      --dark: #0c1b2a;
+      --muted: #cfe0f5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      background: linear-gradient(to bottom, var(--blue) 0%, var(--dark) 100%);
+      background-attachment: fixed;
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    header {
+      background: rgba(12,27,42,0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid var(--orange);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 15px 0;
+    }
+    nav a {
+      font-weight: 700;
+      color: var(--white);
+      padding: 10px 15px;
+      border-radius: 6px;
+      transition: background 0.3s, color 0.3s;
+    }
+    nav a:hover, nav a.active {
+      background: var(--orange);
+      color: var(--dark);
+    }
+
+    .gallery {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .gallery h2 {
+      color: var(--orange);
+      margin-bottom: 20px;
+    }
+    .gallery .intro {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      color: var(--muted);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    /* Album Tiles */
+    .album-tile {
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .album-tile img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .album-tile:hover img {
+      transform: scale(1.05);
+    }
+    .album-tile span {
+      position: absolute;
+      bottom: 10px; left: 10px;
+      background: rgba(12,27,42,0.7);
+      padding: 6px 10px;
+      border-radius: 6px;
+      color: var(--white);
+      font-weight: 600;
+    }
+    .album-tile::after {
+      content: "📁";
+      position: absolute;
+      top: 10px; right: 10px;
+      font-size: 1.2rem;
+      color: var(--orange);
+    }
+
+    /* Photo Tiles */
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+    .gallery-item span {
+      position: absolute;
+      bottom: 8px; left: 8px;
+      background: rgba(12,27,42,0.7);
+      padding: 4px 8px;
+      border-radius: 6px;
+      color: var(--white);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px; right: 30px;
+      font-size: 2rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    footer {
+      background: rgba(12,27,42,0.9);
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 2px solid var(--orange);
+    }
+    footer p {
+      margin: 8px 0;
+      color: var(--muted);
+    }
+    footer .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+    }
+    footer .social-icons a {
+      color: var(--orange);
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+    footer .social-icons a:hover {
+      color: var(--white);
+    }
+  </style>
 </head>
 <body>
   <!-- Header -->
@@ -22,14 +204,12 @@
     <h2>DMAC Photo Gallery</h2>
     <p class="intro">Browse albums from our events, competitions, and fun-fly gatherings.</p>
 
-    <!-- Album tiles -->
     <div id="album-grid" class="gallery-grid"></div>
 
-    <!-- Album view -->
     <div id="album-view" style="display:none;">
       <h3 id="album-title"></h3>
       <div id="album-photos" class="gallery-grid"></div>
-      <button onclick="closeAlbum()">← Back to Albums</button>
+      <button id="back-button" type="button">← Back to Albums</button>
     </div>
   </section>
 
@@ -49,94 +229,39 @@
     </div>
   </footer>
 
-  <!-- Script -->
+  <!-- JS -->
   <script>
     const username = "vertxgamer";
     const repo = "DMAC-gallery";
-    const path = "images";
+    const basePath = "images";
+
+    const albumGrid = document.getElementById("album-grid");
+    const albumView = document.getElementById("album-view");
+    const albumTitle = document.getElementById("album-title");
+    const albumPhotos = document.getElementById("album-photos");
+    const backButton = document.getElementById("back-button");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+
+    function showAlbums() {
+      albumGrid.style.display = "grid";
+      albumView.style.display = "none";
+    }
+    function showAlbumView() {
+      albumGrid.style.display = "none";
+      albumView.style.display = "block";
+    }
+
+    async function fetchJSON(url) {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Failed to fetch " + url);
+      return res.json();
+    }
 
     async function loadAlbums() {
-      const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}?ref=main`);
-      const items = await response.json();
-      const albumGrid = document.getElementById("album-grid");
+      const items = await fetchJSON(`https://api.github.com/repos/${username}/${repo}/contents/${basePath}?ref=main`);
+      albumGrid.innerHTML = "";
 
       for (const item of items) {
         if (item.type === "dir") {
-          // Fetch files inside album
-          const albumResponse = await fetch(item.url);
-          const albumFiles = await albumResponse.json();
-          const imageFiles = albumFiles.filter(f => f.type === "file" && f.name.match(/\.(jpg|jpeg|png|gif)$/i));
-
-          if (imageFiles.length > 0) {
-            // Use the last file (most recent) as thumbnail
-            const latestFile = imageFiles[imageFiles.length - 1];
-
-            const albumTile = document.createElement("div");
-            albumTile.className = "gallery-item album-tile";
-
-            const img = document.createElement("img");
-            img.src = latestFile.download_url;
-            img.alt = item.name;
-
-            const caption = document.createElement("span");
-            caption.textContent = item.name;
-
-            albumTile.appendChild(img);
-            albumTile.appendChild(caption);
-
-            albumTile.addEventListener("click", () => openAlbum(item.name, albumFiles));
-
-            albumGrid.appendChild(albumTile);
-          }
-        }
-      }
-    }
-
-    function openAlbum(name, files) {
-      document.getElementById("album-grid").style.display = "none";
-      document.getElementById("album-view").style.display = "block";
-      document.getElementById("album-title").textContent = name;
-
-      const albumPhotos = document.getElementById("album-photos");
-      albumPhotos.innerHTML = "";
-
-      files.forEach(file => {
-        if (file.type === "file" && file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
-          const photoTile = document.createElement("div");
-          photoTile.className = "gallery-item";
-
-          const img = document.createElement("img");
-          img.src = file.download_url;
-          img.alt = file.name;
-
-          img.addEventListener("click", () => {
-            document.getElementById("lightbox-img").src = file.download_url;
-            document.getElementById("lightbox").style.display = "flex";
-          });
-
-          const caption = document.createElement("span");
-          caption.textContent = file.name.replace(/\.[^/.]+$/, "");
-
-          photoTile.appendChild(img);
-          photoTile.appendChild(caption);
-          albumPhotos.appendChild(photoTile);
-        }
-      });
-    }
-
-    function closeAlbum() {
-      document.getElementById("album-view").style.display = "none";
-      document.getElementById("album-grid").style.display = "grid";
-    }
-
-    // Close lightbox
-    document.getElementById("lightbox").addEventListener("click", (e) => {
-      if (e.target.id === "lightbox" || e.target.className === "lightbox-close") {
-        document.getElementById("lightbox").style.display = "none";
-      }
-    });
-
-    loadAlbums();
-  </script>
-</body>
-</html>
+          const albumFiles = await fetchJSON(item.url
