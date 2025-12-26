@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>DMAC Photo Gallery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Link to your stylesheet -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,7 +11,6 @@
   <header>
     <nav>
       <ul>
-        <!-- Link back to your main DMAC site -->
         <li><a href="https://yourusername.github.io/dmac-site">Back to DMAC Site</a></li>
         <li><a href="index.html" class="active">Gallery</a></li>
       </ul>
@@ -24,20 +22,8 @@
     <h2>DMAC Photo Gallery</h2>
     <p class="intro">Browse highlights from our events, competitions, and fun-fly gatherings.</p>
 
-    <div class="gallery-grid">
-      <!-- Example images (replace with your own) -->
-      <div class="gallery-item">
-        <img src="images/photo1.jpg" alt="Event photo 1">
-        <span>Event 1</span>
-      </div>
-      <div class="gallery-item">
-        <img src="images/photo2.jpg" alt="Event photo 2">
-        <span>Event 2</span>
-      </div>
-      <div class="gallery-item">
-        <img src="images/photo3.jpg" alt="Event photo 3">
-        <span>Event 3</span>
-      </div>
+    <div id="gallery-grid" class="gallery-grid">
+      <!-- Images will be injected here by JavaScript -->
     </div>
   </section>
 
@@ -50,5 +36,40 @@
       <a href="#">YouTube</a>
     </div>
   </footer>
+
+  <!-- Script to auto-load images -->
+  <script>
+    // Replace with your GitHub username and repo name
+    const username = "yourusername";
+    const repo = "dmac-gallery";
+    const path = "images";
+
+    async function loadGallery() {
+      const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}`);
+      const files = await response.json();
+
+      const gallery = document.getElementById("gallery-grid");
+
+      files.forEach(file => {
+        if (file.type === "file" && file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
+          const item = document.createElement("div");
+          item.className = "gallery-item";
+
+          const img = document.createElement("img");
+          img.src = file.download_url;
+          img.alt = file.name;
+
+          const caption = document.createElement("span");
+          caption.textContent = file.name.replace(/\.[^/.]+$/, ""); // filename without extension
+
+          item.appendChild(img);
+          item.appendChild(caption);
+          gallery.appendChild(item);
+        }
+      });
+    }
+
+    loadGallery();
+  </script>
 </body>
 </html>
