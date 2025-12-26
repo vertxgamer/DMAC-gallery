@@ -4,38 +4,7 @@
   <meta charset="UTF-8">
   <title>DMAC Photo Gallery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Link to your stylesheet -->
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* Lightbox styles */
-    .lightbox {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-    }
-    .lightbox img {
-      max-width: 90%;
-      max-height: 80%;
-      border-radius: 8px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
-    .lightbox:target {
-      display: flex;
-    }
-    .lightbox-close {
-      position: absolute;
-      top: 20px; right: 30px;
-      font-size: 2rem;
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  </style>
 </head>
 <body>
   <!-- Header -->
@@ -53,8 +22,8 @@
     <h2>DMAC Photo Gallery</h2>
     <p class="intro">Browse highlights from our events, competitions, and fun-fly gatherings.</p>
 
-    <div id="gallery-grid" class="gallery-grid">
-      <!-- Images will be injected here by JavaScript -->
+    <div id="albums">
+      <!-- Albums will be injected here by JavaScript -->
     </div>
   </section>
 
@@ -74,41 +43,64 @@
     </div>
   </footer>
 
-  <!-- Script to auto-load images from GitHub repo -->
+  <!-- Script to auto-load albums and images -->
   <script>
     const username = "vertxgamer";
     const repo = "DMAC-gallery";
     const path = "images";
 
-    async function loadGallery() {
+    async function loadAlbums() {
+      // Get contents of the images folder
       const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}?ref=main`);
-      const files = await response.json();
+      const items = await response.json();
 
-      const gallery = document.getElementById("gallery-grid");
+      const albumsContainer = document.getElementById("albums");
 
-      files.forEach(file => {
-        if (file.type === "file" && file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
-          const item = document.createElement("div");
-          item.className = "gallery-item";
+      for (const item of items) {
+        if (item.type === "dir") {
+          // Create album section
+          const albumSection = document.createElement("div");
+          albumSection.className = "album";
 
-          const img = document.createElement("img");
-          img.src = file.download_url;
-          img.alt = file.name;
+          const albumTitle = document.createElement("h3");
+          albumTitle.textContent = item.name;
+          albumSection.appendChild(albumTitle);
 
-          // Lightbox click handler
-          img.addEventListener("click", () => {
-            document.getElementById("lightbox-img").src = file.download_url;
-            document.getElementById("lightbox").style.display = "flex";
+          const galleryGrid = document.createElement("div");
+          galleryGrid.className = "gallery-grid";
+
+          // Fetch files inside this album folder
+          const albumResponse = await fetch(item.url);
+          const albumFiles = await albumResponse.json();
+
+          albumFiles.forEach(file => {
+            if (file.type === "file" && file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
+              const galleryItem = document.createElement("div");
+              galleryItem.className = "gallery-item";
+
+              const img = document.createElement("img");
+              img.src = file.download_url;
+              img.alt = file.name;
+
+              // Lightbox click handler
+              img.addEventListener("click", () => {
+                document.getElementById("lightbox-img").src = file.download_url;
+                document.getElementById("lightbox").style.display = "flex";
+              });
+
+              const caption = document.createElement("span");
+              caption.textContent = file.name.replace(/\.[^/.]+$/, "");
+
+              galleryItem.appendChild(img);
+              galleryItem.appendChild(caption);
+              galleryGrid.appendChild(galleryItem);
+            }
           });
 
-          const caption = document.createElement("span");
-          caption.textContent = file.name.replace(/\.[^/.]+$/, "");
-
-          item.appendChild(img);
-          item.appendChild(caption);
-          gallery.appendChild(item);
+          albumSection.appendChild(galleryGrid);
+          albumsContainer.appendChild(albumSection);
         }
-      });
+      }
     }
 
     // Close lightbox when clicking outside image
@@ -118,7 +110,7 @@
       }
     });
 
-    loadGallery();
+    loadAlbums();
   </script>
 </body>
 </html>
