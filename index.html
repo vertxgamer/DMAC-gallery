@@ -20,14 +20,20 @@
   <!-- Gallery Section -->
   <section class="gallery">
     <h2>DMAC Photo Gallery</h2>
-    <p class="intro">Browse highlights from our events, competitions, and fun-fly gatherings.</p>
+    <p class="intro">Browse albums from our events, competitions, and fun-fly gatherings.</p>
 
-    <div id="albums">
-      <!-- Albums will be injected here by JavaScript -->
+    <!-- Album tiles -->
+    <div id="album-grid" class="gallery-grid"></div>
+
+    <!-- Album view -->
+    <div id="album-view" style="display:none;">
+      <h3 id="album-title"></h3>
+      <div id="album-photos" class="gallery-grid"></div>
+      <button onclick="closeAlbum()">← Back to Albums</button>
     </div>
   </section>
 
-  <!-- Lightbox container -->
+  <!-- Lightbox -->
   <div id="lightbox" class="lightbox">
     <a href="#" class="lightbox-close">&times;</a>
     <img id="lightbox-img" src="" alt="Expanded view">
@@ -43,67 +49,87 @@
     </div>
   </footer>
 
-  <!-- Script to auto-load albums and images -->
+  <!-- Script -->
   <script>
     const username = "vertxgamer";
     const repo = "DMAC-gallery";
     const path = "images";
 
     async function loadAlbums() {
-      // Get contents of the images folder
       const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${path}?ref=main`);
       const items = await response.json();
-
-      const albumsContainer = document.getElementById("albums");
+      const albumGrid = document.getElementById("album-grid");
 
       for (const item of items) {
         if (item.type === "dir") {
-          // Create album section
-          const albumSection = document.createElement("div");
-          albumSection.className = "album";
-
-          const albumTitle = document.createElement("h3");
-          albumTitle.textContent = item.name;
-          albumSection.appendChild(albumTitle);
-
-          const galleryGrid = document.createElement("div");
-          galleryGrid.className = "gallery-grid";
-
-          // Fetch files inside this album folder
+          // Fetch files inside album
           const albumResponse = await fetch(item.url);
           const albumFiles = await albumResponse.json();
+          const imageFiles = albumFiles.filter(f => f.type === "file" && f.name.match(/\.(jpg|jpeg|png|gif)$/i));
 
-          albumFiles.forEach(file => {
-            if (file.type === "file" && file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
-              const galleryItem = document.createElement("div");
-              galleryItem.className = "gallery-item";
+          if (imageFiles.length > 0) {
+            // Use the last file (most recent) as thumbnail
+            const latestFile = imageFiles[imageFiles.length - 1];
 
-              const img = document.createElement("img");
-              img.src = file.download_url;
-              img.alt = file.name;
+            const albumTile = document.createElement("div");
+            albumTile.className = "gallery-item album-tile";
 
-              // Lightbox click handler
-              img.addEventListener("click", () => {
-                document.getElementById("lightbox-img").src = file.download_url;
-                document.getElementById("lightbox").style.display = "flex";
-              });
+            const img = document.createElement("img");
+            img.src = latestFile.download_url;
+            img.alt = item.name;
 
-              const caption = document.createElement("span");
-              caption.textContent = file.name.replace(/\.[^/.]+$/, "");
+            const caption = document.createElement("span");
+            caption.textContent = item.name;
 
-              galleryItem.appendChild(img);
-              galleryItem.appendChild(caption);
-              galleryGrid.appendChild(galleryItem);
-            }
-          });
+            albumTile.appendChild(img);
+            albumTile.appendChild(caption);
 
-          albumSection.appendChild(galleryGrid);
-          albumsContainer.appendChild(albumSection);
+            albumTile.addEventListener("click", () => openAlbum(item.name, albumFiles));
+
+            albumGrid.appendChild(albumTile);
+          }
         }
       }
     }
 
-    // Close lightbox when clicking outside image
+    function openAlbum(name, files) {
+      document.getElementById("album-grid").style.display = "none";
+      document.getElementById("album-view").style.display = "block";
+      document.getElementById("album-title").textContent = name;
+
+      const albumPhotos = document.getElementById("album-photos");
+      albumPhotos.innerHTML = "";
+
+      files.forEach(file => {
+        if (file.type === "file" && file.name.match(/\.(jpg|jpeg|png|gif)$/i)) {
+          const photoTile = document.createElement("div");
+          photoTile.className = "gallery-item";
+
+          const img = document.createElement("img");
+          img.src = file.download_url;
+          img.alt = file.name;
+
+          img.addEventListener("click", () => {
+            document.getElementById("lightbox-img").src = file.download_url;
+            document.getElementById("lightbox").style.display = "flex";
+          });
+
+          const caption = document.createElement("span");
+          caption.textContent = file.name.replace(/\.[^/.]+$/, "");
+
+          photoTile.appendChild(img);
+          photoTile.appendChild(caption);
+          albumPhotos.appendChild(photoTile);
+        }
+      });
+    }
+
+    function closeAlbum() {
+      document.getElementById("album-view").style.display = "none";
+      document.getElementById("album-grid").style.display = "grid";
+    }
+
+    // Close lightbox
     document.getElementById("lightbox").addEventListener("click", (e) => {
       if (e.target.id === "lightbox" || e.target.className === "lightbox-close") {
         document.getElementById("lightbox").style.display = "none";
