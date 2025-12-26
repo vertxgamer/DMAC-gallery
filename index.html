@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <title>DMAC Photo Gallery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Force-load CSS via absolute URL to avoid path/cache issues -->
-  <link rel="stylesheet" href="https://vertxgamer.github.io/DMAC-gallery/styles.css?v=3">
+  <!-- Correct stylesheet link -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- Header -->
@@ -52,12 +52,10 @@
 
   <!-- Scripts -->
   <script>
-    // Config — change to "Images" if your folder is capitalized
     const username = "vertxgamer";
     const repo = "DMAC-gallery";
-    const basePath = "images"; // or "Images" if that's your folder name
+    const basePath = "images"; // adjust to "Images" if your folder is capitalized
 
-    // Elements
     const albumGrid = document.getElementById("album-grid");
     const albumView = document.getElementById("album-view");
     const albumTitle = document.getElementById("album-title");
@@ -82,22 +80,17 @@
     }
 
     async function loadAlbums() {
-      // List contents of images/
       const items = await fetchJSON(`https://api.github.com/repos/${username}/${repo}/contents/${basePath}?ref=main`);
       albumGrid.innerHTML = "";
 
       for (const item of items) {
         if (item.type === "dir") {
-          // Get files inside the album folder
           const albumFiles = await fetchJSON(item.url);
           const imageFiles = albumFiles.filter(f => f.type === "file" && /\.(jpg|jpeg|png|gif)$/i.test(f.name));
-
           if (imageFiles.length === 0) continue;
 
-          // Use last file as thumbnail (typical API order)
           const latestFile = imageFiles[imageFiles.length - 1];
 
-          // Build album tile — uses .album-tile styles
           const tile = document.createElement("div");
           tile.className = "album-tile";
 
@@ -111,12 +104,10 @@
           tile.appendChild(img);
           tile.appendChild(caption);
 
-          // Open album on click
           tile.addEventListener("click", () => openAlbum(item.name, item.url));
           albumGrid.appendChild(tile);
         }
       }
-
       showAlbums();
     }
 
@@ -152,17 +143,14 @@
       lightbox.style.display = "flex";
     }
 
-    // Close lightbox
     lightbox.addEventListener("click", (e) => {
       if (e.target.id === "lightbox" || e.target.className === "lightbox-close") {
         lightbox.style.display = "none";
       }
     });
 
-    // Back button
     backButton.addEventListener("click", showAlbums);
 
-    // Kick off
     document.addEventListener("DOMContentLoaded", loadAlbums);
   </script>
 </body>
