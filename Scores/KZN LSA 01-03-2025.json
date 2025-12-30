@@ -20,9 +20,9 @@
           "Rank": "1",
           "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/2.kznlsa_010325/report_pilot_16.html",
           "Pilot": "Alex van der Spuy Jr",
-          "Final Score\n[rs]": "1�000,0\n70,9%",
-          "Seq 1": "1�000,0\n70,4%",
-          "Seq 2": "1�000,0\n73,4%"
+          "Final Score\n[rs]": "1000,0\n70,9%",
+          "Seq 1": "1000,0\n70,4%",
+          "Seq 2": "1000,0\n73,4%"
         },
         {
           "Rank": "2",
@@ -52,9 +52,9 @@
           "Rank": "1",
           "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/2.kznlsa_010325/report_pilot_8.html",
           "Pilot": "Keegan Smit",
-          "Final Score\n[rs]": "1�000,0\n76,6%",
+          "Final Score\n[rs]": "1000,0\n76,6%",
           "Seq 1": "987,0\n77,3%",
-          "Seq 2": "1�000,0\n75,3%"
+          "Seq 2": "1000,0\n75,3%"
         },
         {
           "Rank": "2",
@@ -77,7 +77,7 @@
           "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/2.kznlsa_010325/report_pilot_1.html",
           "Pilot": "Rolf Bartels\n(Skywind Extra NG 104)",
           "Final Score\n[rs]": "968,0\n74,4%",
-          "Seq 1": "1�000,0\n78,3%",
+          "Seq 1": "1000,0\n78,3%",
           "Seq 2": "940,3\n70,8%"
         }
       ]
@@ -100,9 +100,9 @@
           "Rank": "1",
           "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/2.kznlsa_010325/report_pilot_15.html",
           "Pilot": "Johan De Lange",
-          "Final Score\n[rs]": "1�000,0\n54,2%",
-          "Seq 1": "1�000,0\n49,2%\nthrown",
-          "Seq 2": "1�000,0\n56,9%"
+          "Final Score\n[rs]": "1000,0\n54,2%",
+          "Seq 1": "1000,0\n49,2%\nthrown",
+          "Seq 2": "1000,0\n56,9%"
         }
       ]
     },
@@ -124,9 +124,9 @@
           "Rank": "1",
           "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/2.kznlsa_010325/report_pilot_10.html",
           "Pilot": "Mark Savage",
-          "Final Score\n[rs]": "1�000,0\n52,2%",
-          "Seq 1": "1�000,0\n51,2%",
-          "Seq 2": "1�000,0\n44,6%\nthrown"
+          "Final Score\n[rs]": "1000,0\n52,2%",
+          "Seq 1": "1000,0\n51,2%",
+          "Seq 2": "1000,0\n44,6%\nthrown"
         }
       ]
     },
@@ -148,7 +148,7 @@
           "Rank": "1",
           "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/2.kznlsa_010325/report_pilot_15.html",
           "Pilot": "Johan De Lange",
-          "Final Score\n[rs]": "1�000,000",
+          "Final Score\n[rs]": "1000,000",
           "Seq 1": "49,169%\nthrown",
           "Seq 2": "56,881%"
         },
