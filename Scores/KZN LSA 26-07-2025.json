@@ -1,0 +1,290 @@
+{
+  "event": "6. KZN LSA 26-07-2025",
+  "date": "26-Jul-2025 13:50",
+  "classes": [
+    {
+      "class": "Basic",
+      "headers": [
+        "Rank",
+        "Pilot",
+        "Final Score\n[rs]",
+        "Known Round 1 Seq 1",
+        "Known Round 1 Seq 2",
+        "Known Round 2 Seq 1",
+        "Known Round 2 Seq 2"
+      ],
+      "pilots": [
+        {
+          "Rank": "1",
+          "Pilot": "Eike Richter",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_12.html",
+          "Final Score\n[rs]": "1�000,0\n69,7%",
+          "Known Round 1 Seq 1": "1�000,0\n58,1%",
+          "Known Round 1 Seq 2": "972,9\n70,6%\nthrown",
+          "Known Round 2 Seq 1": "1�000,0\n74,3%",
+          "Known Round 2 Seq 2": "1�000,0\n64,1%"
+        },
+        {
+          "Rank": "2",
+          "Pilot": "Alex van der SpuyZ(Snr)",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_11.html",
+          "Final Score\n[rs]": "972,8\n66,5%",
+          "Known Round 1 Seq 1": "962,7\n56,0%",
+          "Known Round 1 Seq 2": "1�000,0\n72,6%",
+          "Known Round 2 Seq 1": "955,6\n71,0%",
+          "Known Round 2 Seq 2": "839,8\n53,8%\nthrown"
+        }
+      ]
+    },
+    {
+      "class": "Sportsman",
+      "headers": [
+        "Rank",
+        "Pilot",
+        "Final Score\n[rs]",
+        "Known Round 1 Seq 1",
+        "Known Round 1 Seq 2",
+        "Known Round 2 Seq 1",
+        "Known Round 2 Seq 2"
+      ],
+      "pilots": [
+        {
+          "Rank": "1",
+          "Pilot": "Alex van der Spuy Jr",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_16.html",
+          "Final Score\n[rs]": "1�000,0\n75,0%",
+          "Known Round 1 Seq 1": "999,1\n74,2%\nthrown",
+          "Known Round 1 Seq 2": "1�000,0\n75,5%",
+          "Known Round 2 Seq 1": "1�000,0\n75,2%",
+          "Known Round 2 Seq 2": "1�000,0\n72,0%"
+        },
+        {
+          "Rank": "2",
+          "Pilot": "Gerhard De Lange",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_14.html",
+          "Final Score\n[rs]": "975,2\n72,1%",
+          "Known Round 1 Seq 1": "1�000,0\n74,3%",
+          "Known Round 1 Seq 2": "953,3\n72,0%",
+          "Known Round 2 Seq 1": "923,9\n69,4%\nthrown",
+          "Known Round 2 Seq 2": "972,3\n70,0%"
+        }
+      ]
+    },
+    {
+      "class": "Intermediate",
+      "headers": [
+        "Rank",
+        "Pilot",
+        "Final Score\n[rs]",
+        "Known Round 1 Seq 1",
+        "Known Round 1 Seq 2",
+        "Known Round 2 Seq 1",
+        "Known Round 2 Seq 2"
+      ],
+      "pilots": [
+        {
+          "Rank": "1",
+          "Pilot": "Rolf Bartels\n(Skywind Extra NG 104)",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_1.html",
+          "Final Score\n[rs]": "1�000,0\n80,6%",
+          "Known Round 1 Seq 1": "1�000,0\n79,8%",
+          "Known Round 1 Seq 2": "1�000,0\n81,2%",
+          "Known Round 2 Seq 1": "993,3\n80,7%\nthrown",
+          "Known Round 2 Seq 2": "1�000,0\n79,3%"
+        },
+        {
+          "Rank": "2",
+          "Pilot": "Keegan Smit",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_8.html",
+          "Final Score\n[rs]": "994,4\n80,3%",
+          "Known Round 1 Seq 1": "990,6\n79,1%",
+          "Known Round 1 Seq 2": "992,5\n80,5%",
+          "Known Round 2 Seq 1": "1�000,0\n81,3%",
+          "Known Round 2 Seq 2": "984,3\n78,0%\nthrown"
+        },
+        {
+          "Rank": "3",
+          "Pilot": "Richard Flemming",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_4.html",
+          "Final Score\n[rs]": "936,7\n75,4%",
+          "Known Round 1 Seq 1": "865,4\n69,1%\nthrown",
+          "Known Round 1 Seq 2": "940,2\n76,3%",
+          "Known Round 2 Seq 1": "886,9\n72,1%",
+          "Known Round 2 Seq 2": "983,0\n77,9%"
+        },
+        {
+          "Rank": "4",
+          "Pilot": "Dean Halley",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_13.html",
+          "Final Score\n[rs]": "932,0\n74,6%",
+          "Known Round 1 Seq 1": "928,2\n74,1%",
+          "Known Round 1 Seq 2": "943,5\n76,6%",
+          "Known Round 2 Seq 1": "853,4\n69,4%\nthrown",
+          "Known Round 2 Seq 2": "924,2\n73,3%"
+        },
+        {
+          "Rank": "5",
+          "Pilot": "Brad Rae",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_2.html",
+          "Final Score\n[rs]": "926,4\n74,2%",
+          "Known Round 1 Seq 1": "922,6\n73,7%",
+          "Known Round 1 Seq 2": "911,9\n74,0%",
+          "Known Round 2 Seq 1": "881,2\n71,6%\nthrown",
+          "Known Round 2 Seq 2": "944,8\n74,9%"
+        },
+        {
+          "Rank": "6",
+          "Pilot": "Darryl Tarr",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_9.html",
+          "Final Score\n[rs]": "827,8\n66,7%",
+          "Known Round 1 Seq 1": "775,9\n61,9%\nthrown",
+          "Known Round 1 Seq 2": "819,1\n66,5%",
+          "Known Round 2 Seq 1": "794,1\n64,5%",
+          "Known Round 2 Seq 2": "870,3\n69,0%"
+        },
+        {
+          "Rank": "7",
+          "Pilot": "Eric Bell",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_3.html",
+          "Final Score\n[rs]": "694,4\n55,6%",
+          "Known Round 1 Seq 1": "711,2\n56,8%",
+          "Known Round 1 Seq 2": "499,5\n40,5%\nthrown",
+          "Known Round 2 Seq 1": "590,6\n48,0%",
+          "Known Round 2 Seq 2": "781,3\n61,9%"
+        }
+      ]
+    },
+    {
+      "class": "Advanced",
+      "headers": [
+        "Rank",
+        "Pilot",
+        "Final Score\n[rs]",
+        "Known Round 1 Seq 1",
+        "Known Round 1 Seq 2",
+        "Known Round 2 Seq 1",
+        "Known Round 2 Seq 2"
+      ],
+      "pilots": [
+        {
+          "Rank": "1",
+          "Pilot": "Johan De Lange",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_15.html",
+          "Final Score\n[rs]": "1�000,0\n64,3%",
+          "Known Round 1 Seq 1": "1�000,0\n61,1%",
+          "Known Round 1 Seq 2": "1�000,0\n60,3%\nthrown",
+          "Known Round 2 Seq 1": "1�000,0\n65,0%",
+          "Known Round 2 Seq 2": "1�000,0\n66,9%"
+        }
+      ]
+    },
+    {
+      "class": "Unlimited",
+      "headers": [
+        "Rank",
+        "Pilot",
+        "Final Score\n[rs]",
+        "Known Round 1 Seq 1",
+        "Known Round 1 Seq 2",
+        "Known Round 2 Seq 1",
+        "Known Round 2 Seq 2"
+      ],
+      "pilots": [
+        {
+          "Rank": "1",
+          "Pilot": "Cliff Chen",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_7.html",
+          "Final Score\n[rs]": "1�000,0\n77,7%",
+          "Known Round 1 Seq 1": "1�000,0\n77,0%",
+          "Known Round 1 Seq 2": "1�000,0\n77,3%",
+          "Known Round 2 Seq 1": "1�000,0\n76,9%\nthrown",
+          "Known Round 2 Seq 2": "1�000,0\n78,7%"
+        },
+        {
+          "Rank": "2",
+          "Pilot": "Mark Savage",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_10.html",
+          "Final Score\n[rs]": "748,4\n58,1%",
+          "Known Round 1 Seq 1": "766,4\n59,0%",
+          "Known Round 1 Seq 2": "744,4\n57,5%",
+          "Known Round 2 Seq 1": "709,4\n54,6%\nthrown",
+          "Known Round 2 Seq 2": "734,4\n57,8%"
+        }
+      ]
+    },
+    {
+      "class": "Seniors",
+      "headers": [
+        "Rank",
+        "Pilot",
+        "Final Score\n[rs]",
+        "Known Round 1 Seq 1",
+        "Known Round 1 Seq 2",
+        "Known Round 2 Seq 1",
+        "Known Round 2 Seq 2"
+      ],
+      "pilots": [
+        {
+          "Rank": "1",
+          "Pilot": "Dean Halley",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_13.html",
+          "Final Score\n[rs]": "1�000,000",
+          "Known Round 1 Seq 1": "74,102%",
+          "Known Round 1 Seq 2": "76,570%",
+          "Known Round 2 Seq 1": "69,352%\nthrown",
+          "Known Round 2 Seq 2": "73,258%"
+        },
+        {
+          "Rank": "2",
+          "Pilot": "Eike Richter",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_12.html",
+          "Final Score\n[rs]": "933,403",
+          "Known Round 1 Seq 1": "58,133%\nthrown",
+          "Known Round 1 Seq 2": "70,633%",
+          "Known Round 2 Seq 1": "74,300%",
+          "Known Round 2 Seq 2": "64,083%"
+        },
+        {
+          "Rank": "3",
+          "Pilot": "Darryl Tarr",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_9.html",
+          "Final Score\n[rs]": "893,103",
+          "Known Round 1 Seq 1": "61,945%\nthrown",
+          "Known Round 1 Seq 2": "66,477%",
+          "Known Round 2 Seq 1": "64,531%",
+          "Known Round 2 Seq 2": "68,984%"
+        },
+        {
+          "Rank": "4",
+          "Pilot": "Johan De Lange",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_15.html",
+          "Final Score\n[rs]": "861,878",
+          "Known Round 1 Seq 1": "61,069%",
+          "Known Round 1 Seq 2": "60,256%\nthrown",
+          "Known Round 2 Seq 1": "65,031%",
+          "Known Round 2 Seq 2": "66,900%"
+        },
+        {
+          "Rank": "5",
+          "Pilot": "Mark Savage",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_10.html",
+          "Final Score\n[rs]": "778,440",
+          "Known Round 1 Seq 1": "58,999%",
+          "Known Round 1 Seq 2": "57,540%",
+          "Known Round 2 Seq 1": "54,572%\nthrown",
+          "Known Round 2 Seq 2": "57,777%"
+        },
+        {
+          "Rank": "6",
+          "Pilot": "Eric Bell",
+          "Pilot_link": "https://kznlsa.s3.eu-west-1.amazonaws.com/6.kznlsa_260725/report_pilot_3.html",
+          "Final Score\n[rs]": "744,444",
+          "Known Round 1 Seq 1": "56,781%",
+          "Known Round 1 Seq 2": "40,539%\nthrown",
+          "Known Round 2 Seq 1": "47,992%",
+          "Known Round 2 Seq 2": "61,930%"
+        }
+      ]
+    }
+  ]
+}
